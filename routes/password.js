@@ -35,5 +35,9 @@ router.get('/compare/:pass/:hash', function(req, res, next) {
     
 });
 
+router.get('/generate', function(req,res,next){
+    res.json({password : utils.generatePassword()});
+});
+
 
 module.exports = router;

@@ -1,6 +1,7 @@
-var assert = require('assert');
-var utils = require('../utils/passUtilities');
-var bcrypt = require('bcrypt');
+const assert = require('assert');
+const utils = require('../utils/passUtilities');
+const bcrypt = require('bcrypt');
+const zxcvbn = require('zxcvbn');
 
 describe('Password Tests', function() {
   describe('hashPassword', function() {
@@ -42,5 +43,19 @@ describe('Password Tests', function() {
 
   });
 
+
+  describe('generatePassword', function(){
+    it('should generate a random password',function(){
+      var pass1 = utils.generatePassword();
+      var pass2 = utils.generatePassword();
+
+      assert.notEqual(pass1,pass2,`Passwords are equal! pass1=${pass1} pass2=${pass2}`);
+    });
+
+    it('should generate a strong password',function(){
+      var pass = utils.generatePassword();
+      assert.ok(zxcvbn(pass).score > 3, `Password ${pass} is not strong enough`);
+    });
+  });
 
 });
