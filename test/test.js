@@ -24,6 +24,23 @@ describe('Password Tests', function() {
     it('should throw an exception', function(){
       assert.throws(() => utils.validateStrength());
     });
-  })
+  });
+
+  describe('validatePass', function(){
+    it('should be a invalid pass', function(){
+      utils.validatePassword('password','$2a$10$6328pUcWFtKVuQBOFI0nuufXMJhvgVFwWSQV8/UHf76bsMWJtsVLe',(err, valid) =>{
+        assert.equal(valid,false);
+      })
+    });
+      
+
+    it('should be a valid pass', function(){
+      utils.validatePassword('password','$2a$10$67V8pUcWFtKVuQBOFI0nuufXMJhvgVFwWSQV8/UHf76bsMWJtsVLe',(err, valid) =>{
+        assert.equal(valid,true);
+      });
+    });
+
+  });
+
 
 });

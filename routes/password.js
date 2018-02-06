@@ -22,4 +22,18 @@ router.get('/strength/:pass', function(req, res, next) {
     res.json({ isStrong : utils.validateStrength(password)});
 });
 
+router.get('/compare/:pass/:hash', function(req, res, next) {
+    let password = req.params.pass;
+    let hash = req.params.hash;
+    utils.validatePassword(password,hash,((err,valid) => {
+        if(err){
+            console.error(err);
+            res.json(err);
+        }
+        res.json({ isValid : valid });
+    }))
+    
+});
+
+
 module.exports = router;
