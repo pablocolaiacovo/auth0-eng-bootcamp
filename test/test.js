@@ -10,4 +10,20 @@ describe('Password Tests', function() {
       });
     })
   });
+
+
+  describe('validateStrength', function(){
+    it('should be a weak password', function(){
+      assert.equal(utils.validateStrength('12345'),false);
+    });
+
+    it('should be a strong password', function(){
+      assert.equal(utils.validateStrength('iqwoueq9824$'),true);
+    });
+
+    it('should throw an exception', function(){
+      assert.throws(() => utils.validateStrength());
+    });
+  })
+
 });
