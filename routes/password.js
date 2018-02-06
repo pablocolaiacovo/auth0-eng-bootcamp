@@ -17,7 +17,7 @@ router.get('/hash/:pass', function(req, res, next) {
 });
 
 /* GET Check password strength */
-router.get('/stength/:pass', function(req, res, next) {
+router.get('/strength/:pass', function(req, res, next) {
     let password = req.params.pass;
     res.json({ isStrong : utils.validateStrength(password)});
 });
