@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ip = require('ip');
+var ifaces = require('os').networkInterfaces();
 
 var passwords = require('./routes/password');
 
@@ -22,6 +24,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/pass', passwords);
+
+app.get('/health', (req, res) => {
+  res.json({ "ip": ip.address() });
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
